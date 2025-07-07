@@ -1,0 +1,100 @@
+services:
+  etudiant-db:
+    container_name: ms_etudiant_db
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: m1Info
+      MONGO_INITDB_ROOT_PASSWORD: m1Info
+      MONGO_INITDB_DATABASE: etudiant_db
+    volumes:
+      - etudiant-db:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  classe-db:
+    container_name: ms_classe_db
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: m1Info
+      MONGO_INITDB_ROOT_PASSWORD: m1Info
+      MONGO_INITDB_DATABASE: classe_db
+    volumes:
+      - classe-db:/data/db
+    ports:
+      - 27018:27017
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  mail-dev:
+    container_name: ms_mail_dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+      # - 1025:1032
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  zipkin:
+    container_name: zipkin-container
+    image: openzipkin/zipkin:latest
+    ports:
+      - 9411:9411
+    networks:
+      - microservices-net
+
+  keycloak:
+    container_name: keycloak-ms
+    image: quay.io/keycloak/keycloak:latest
+    ports:
+      - 9098:8080
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    networks:
+      - microservices-net
+    command:
+      - "start-dev"
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper-container
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      - microservices-net
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: ms_kafka
+    ports:
+      - 9092:9092
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      # KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  etudiant-db:
+  classe-db:

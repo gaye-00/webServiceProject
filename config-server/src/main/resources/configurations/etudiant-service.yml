@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27018
+      database: etudiant_db
+      username: m1Info
+      password: m1Info
+      authentication-database: admin
+
+server:
+  servlet:
+    context-path: /api
+  port: 8020
