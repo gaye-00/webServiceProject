@@ -19,6 +19,27 @@
       "mainClass": "com.discovery.discovery_server.DiscoveryServerApplication",
       "projectName": "discovery-server",
       "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=42147 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=discovery-server"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-ClasseServiceApplication<classe-service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.webService.classe.ClasseServiceApplication",
+      "projectName": "classe-service",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-EtudiantServiceApplication<etudiant-service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.webService.etudiant.EtudiantServiceApplication",
+      "projectName": "etudiant-service",
+      "args": "",
       "envFile": "${workspaceFolder}/.env"
     }
   ]
