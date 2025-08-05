@@ -24,4 +24,5 @@ public class StudentResponse {
     private String email;
     private Boolean active;
     private Boolean blocked;
+    private String classeId;
 }

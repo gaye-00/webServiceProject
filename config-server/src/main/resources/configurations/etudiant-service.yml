@@ -2,13 +2,27 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27018
+      port: 27019
       database: etudiant_db
       username: m1Info
       password: m1Info
       authentication-database: admin
 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
 server:
   servlet:
     context-path: /api
   port: 8020
+
+grpc:
+  client:
+    personne-service:
+      address: "static://localhost:8012"
+      negotiationType: PLAINTEXT

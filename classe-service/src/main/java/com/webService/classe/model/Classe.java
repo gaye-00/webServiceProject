@@ -1,4 +1,4 @@
-package com.webService.etudiant.model;
+package com.webService.classe.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +13,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @SuperBuilder
 @Document("students")
-public class Student extends User {
-
-    private String verificationCode;
-    private LEVEL level;
-    private DEPARTEMENT department;
-    private String classeId;
+public class Classe extends BaseEntity {
+    
+    private String name;
+    private String description;
+    private CYCLE cycle;
+    private FILIERE filiere;
 }

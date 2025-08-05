@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.webService.grpc.config";
+option java_outer_classname = "ClasseServiceProto";
+
+service ClasseService {
+  rpc Ajouter (ClasseRequest) returns (ClasseResponse);
+  rpc Lister (Empty) returns (ClasseListResponse);
+  rpc Rechercher (ClasseIdRequest) returns (ClasseResponse);
+  rpc Modifier (ClasseUpdateRequest) returns (ClasseResponse);
+  rpc Supprimer (ClasseIdRequest) returns (DeleteResponse);
+}
+
+message ClasseRequest {
+  string name = 1;
+  string description = 2;
+  string cycle = 3;
+  string filiere = 4;
+}
+
+message ClasseResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string cycle = 4;
+  string filiere = 5;
+}
+
+message ClasseUpdateRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string cycle = 4;
+  string filiere = 5;
+}
+
+message ClasseIdRequest {
+  string id = 1;
+}
+
+message ClasseListResponse {
+  repeated ClasseResponse classes = 1;
+}
+
+message DeleteResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message Empty {}

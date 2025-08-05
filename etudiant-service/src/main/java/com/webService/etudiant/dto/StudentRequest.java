@@ -18,11 +18,11 @@ public class StudentRequest {
     // private String INE;
 
     @NotNull(message = "Level is required")
-    @NotBlank(message = "Level is not a valid")
+    // @NotBlank(message = "Level is not a valid")
     private LEVEL level;
 
     @NotNull(message = "Department is required")
-    @NotBlank(message = "Department is not a valid")
+    // @NotBlank(message = "Department is not a valid")
     private DEPARTEMENT department;
 
     @NotNull(message = "First name is required")
@@ -41,4 +41,9 @@ public class StudentRequest {
     @NotBlank(message = "Email is not a valid")
     @Email(message = "Email is not a valid format")
     private String email;
+
+    @NotNull(message = "Classe is required")
+    @NotBlank(message = "Classe is not a valid")
+    private String classeId;
+
 }

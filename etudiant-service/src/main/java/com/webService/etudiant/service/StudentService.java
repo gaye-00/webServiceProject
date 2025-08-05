@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.webService.etudiant.client.GrpcClasseClient;
 import com.webService.etudiant.dto.StudentRequest;
 import com.webService.etudiant.dto.StudentResponse;
 import com.webService.etudiant.model.DEPARTEMENT;
@@ -36,6 +37,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final Logger logger = LoggerFactory.getLogger(StudentService.class);
+    private final GrpcClasseClient grpcClasseClient;
 
 
     public ResponseEntity<List<StudentResponse>> getAll() {
@@ -180,6 +182,7 @@ public class StudentService {
                 .email(student.getEmail())
                 .active(student.isActive())
                 .blocked(student.isBlocked())
+                .classeId(student.getClasseId())
                 .build();
     }
 
@@ -190,6 +193,7 @@ public class StudentService {
                 .firstName(Objects.requireNonNull(studentRequest.getFirstName(), "First Name cannot be null"))
                 .lastName(Objects.requireNonNull(studentRequest.getLastName(), "Last Name cannot be null"))
                 .email(Objects.requireNonNull(studentRequest.getEmail(), "Email cannot be null"))
+                .classeId(Objects.requireNonNull(studentRequest.getClasseId(), "Classe ID cannot be null"))
                 .creatAt(LocalDateTime.now())
                 .lastModifiedAt(LocalDateTime.now())
                 .build();

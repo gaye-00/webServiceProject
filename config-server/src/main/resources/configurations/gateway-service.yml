@@ -16,46 +16,14 @@ spring:
             locator:
               enabled: true
           routes:
-            - id: course-service
-              uri: lb:http://COURSE-SERVICE
+            - id: classe-service
+              uri: lb:http://CLASSE-SERVICE
               predicates:
-                - Path=/api/v1/courses/**
-            - id: assessment-service
-              uri: lb:http://COURSE-SERVICE
-              predicates:
-                - Path=/api/v1/assessments/**
-            - id: lesson-service
-              uri: lb:http://COURSE-SERVICE
-              predicates:
-                - Path=/api/v1/lessons/**
-            - id: lesson-pdf-service
-              uri: lb:http://COURSE-SERVICE
-              predicates:
-                - Path=/api/cours/**
-            - id: module-service
-              uri: lb:http://COURSE-SERVICE
-              predicates:
-                - Path=/api/v1/modules/**
-            - id: admin-service
-              uri: lb:http://USER-SERVICE
-              predicates:
-                - Path=/api/v1/admins/**
-            - id: professor-service
-              uri: lb:http://USER-SERVICE
-              predicates:
-                - Path=/api/v1/professors/**
-            - id: student-service
-              uri: lb:http://USER-SERVICE
+                - Path=/api/v1/classes/**
+            - id: etudiant-service
+              uri: lb:http://ETUDIANT-SERVICE
               predicates:
                 - Path=/api/v1/students/**
-            - id: notification-service
-              uri: lb:http://NOTIFICATION-SERVICE
-              predicates:
-                - Path=/api/v1/notifications/**
-            - id: ai-deepSeek
-              uri: lb:http://AI-DEEPSEEK
-              predicates:
-                - Path=/api/v1/deepSeek/**
     loadbalancer:
       cache:
         enabled: true
