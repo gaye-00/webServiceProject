@@ -16,6 +16,13 @@ spring:
       hibernate:
         format_sql: true
 
+  graphql:
+    path: /graphql
+    graphiql:
+      enabled: true
+    schema:
+      locations: classpath:graphql/
+
 server:
   servlet:
     context-path: /api
@@ -26,3 +33,12 @@ grpc:
     personne-service:
       address: "static://localhost:8012"
       negotiationType: PLAINTEXT
+# graphql:
+#   servlet:
+#     mapping: /graphql
+#     enabled: true
+#   graphiql:
+#     enabled: true
+#     mapping: /graphiql
+#     endpoint: /graphql
+#     page-title: GraphiQL

@@ -36,10 +36,10 @@ public class StudentController {
     private final StudentService studentService;
     private final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
-    @GetMapping
-    public ResponseEntity<List<StudentResponse>> getAll() {
-        return studentService.getAll();
-    }
+    // @GetMapping
+    // public ResponseEntity<List<StudentResponse>> lister() {
+    //     return studentService.getAll();
+    // }
 
     @GetMapping("/classe/rechercher/{id}")
     public ResponseEntity<?> rechercherClasse(@PathVariable String id) {
@@ -68,18 +68,18 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<StudentResponse> getById(@PathVariable("id") String id) {
-        return studentService.getById(id);
-    }
+    // @GetMapping("/{id}")
+    // public ResponseEntity<StudentResponse> rechercher(@PathVariable("id") String id) {
+    //     return studentService.getById(id);
+    // }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> patchUpdate(@PathVariable String id, @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<String> modifier(@PathVariable String id, @RequestBody Map<String, Object> updates) {
         return studentService.patchUpdate(id, updates);
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody @Valid StudentRequest requestItem) {
+    public ResponseEntity<?> ajouter(@RequestBody @Valid StudentRequest requestItem) {
         // Verifier si la classe existe d'abord
         ClasseResponse classeGrpc = grpcClasseClient.rechercherClasseParId(requestItem.getClasseId());
         if (classeGrpc == null) {
@@ -90,12 +90,12 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") String id, @RequestBody @Valid StudentRequest requestItem) {
+    public ResponseEntity<String> modifier(@PathVariable("id") String id, @RequestBody @Valid StudentRequest requestItem) {
         return studentService.update(id, requestItem);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> supprimer(@PathVariable("id") String id) {
         return studentService.delete(id);
     }
 }

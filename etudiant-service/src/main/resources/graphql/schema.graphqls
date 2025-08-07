@@ -1,0 +1,17 @@
+type Query {
+  allStudents: [StudentResponse!]!
+  studentById(id: String!): StudentResponse
+}
+
+type StudentResponse {
+  id: String
+  level: String
+  department: String
+  firstName: String
+  lastName: String
+  password: String
+  email: String
+  active: Boolean
+  blocked: Boolean
+  classeId: String
+}
